@@ -1,0 +1,41 @@
+version: '3'
+
+services:
+  postgres1:
+    image: postgres:14.5
+    container_name: patients
+    environment:
+      POSTGRES_USER: haritonov_214
+      POSTGRES_PASSWORD: haritonov_214
+      POSTGRES_DB: patients
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./docker/db/scripts/patients:/docker-entrypoint-initdb.d
+      - ./docker/db/config/patients:/etc/postgresql/postgresql.conf
+
+  postgres2:
+    image: postgres:14.5
+    container_name: trains
+    environment:
+      POSTGRES_USER: haritonov_214
+      POSTGRES_PASSWORD: haritonov_214
+      POSTGRES_DB: trains
+    ports:
+      - "5433:5432"
+    volumes:
+      - ./docker/db/scripts/trains:/docker-entrypoint-initdb.d
+      - ./docker/db/config/trains:/etc/postgresql/postgresql.conf
+
+  postgres3:
+    image: postgres:14.5
+    container_name: library
+    environment:
+      POSTGRES_USER: haritonov_214
+      POSTGRES_PASSWORD: haritonov_214
+      POSTGRES_DB: library
+    ports:
+      - "5434:5432"
+    volumes:
+      - ./docker/db/scripts/library:/docker-entrypoint-initdb.d
+      - ./docker/db/scripts/library:/etc/postgresql/postgresql.conf
